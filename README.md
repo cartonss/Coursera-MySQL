@@ -1,74 +1,29 @@
-# Coursera-MySQL
-hi
+Coursera course: https://www.coursera.org/learn/analytics-mysql#
 
-%load_ext sql
+Managing Big Data with MySQL
+Duke University
 
-Now that the SQL library is loaded, we need to connect to a database. The following command will log you into the MySQL server at mysqlserver as the user 'studentuser' and will select the database named 'dognitiondb' :
-%sql mysql://studentuser:studentpw@mysqlserver/dognitiondb
+About this Course
+This course is an introduction to how to use relational databases in business analysis. You will learn how relational databases work, and how to use entity-relationship diagrams to display the structure of the data held within them. This knowledge will help you understand how data needs to be collected in business contexts, and help you identify features you want to consider if you are involved in implementing new data collection efforts. You will also learn how to execute the most useful query and table aggregation statements for business analysts, and practice using them with real databases. No more waiting 48 hours for someone else in the company to provide data to you – you will be able to get the data by yourself! By the end of this course, you will have a clear understanding of how relational databases work, and have a portfolio of queries you can show potential employers. Businesses are collecting increasing amounts of information with the hope that data will yield novel insights into how to improve businesses. Analysts that understand how to access this data – this means you! – will have a strong competitive advantage in this data-smitten business world.
 
-Once you are connected, the output cell (which reads "Out" followed by brackets) will read: "Connected:studentuser@dognitiondb". To make this the default database for our queries, run this "USE" command:
-%sql USE dognitiondb
+Week1
 
-SELECT breed
-FROM dogs LIMIT 10 OFFSET 5;
-10 rows of data will be returned, starting at Row 6.
-An alternative way to write the OFFSET clause in the query is:
-SELECT breed
-FROM dogs LIMIT 5, 10;
+About this Specialization and Course
 
+Understanding Relational Databases
 
-%load_ext sql
-%sql mysql://studentuser:studentpw@mysqlserver/dognitiondb
-%sql USE dognitiondb
+Week2
 
+Queries to Extract Data from Single Tables
 
-SELECT dog_guid, weight
-FROM dogs
-WHERE weight BETWEEN 10 AND 50;
+Week3
 
-SELECT dog_guid, breed
-FROM dogs
-WHERE breed IN ("golden retriever","poodle");
+Queries to Summarize Groups of Data from Multiple Tables
 
-SELECT dog_guid, breed
-FROM dogs
-WHERE breed LIKE ("s%");
+Week4
 
-%%sql
-SELECT dog_guid, subcategory_name, test_name
-FROM reviews
-WHERE YEAR(created_at) = 2014
-LIMIT 10;
+Queries to Address More Detailed Business Questions
 
-%%sql
-SELECT user_guid, gender, breed
-FROM dogs
-WHERE gender = "female" AND breed LIKE ("%terrier%")
-LIMIT 5;
+Week5
 
-SELECT dog_guid, created_at AS time_stamp
-FROM complete_tests
-
-Note that if you use an alias that includes a space, the alias must be surrounded in quotes:
-SELECT dog_guid, created_at AS "time stamp"
-FROM complete_tests
-
-You could also make an alias for a table:
-SELECT dog_guid, created_at AS "time stamp"
-FROM complete_tests AS tests
-
-When the DISTINCT clause is used with multiple columns in a SELECT statement, the combination of all the columns together is used to determine the uniqueness of a row in a result set.
-
-SELECT DISTINCT user_guid, (median_ITI_minutes * 60) AS median_ITI_sec
-FROM dogs 
-ORDER BY median_ITI_sec DESC
-LIMIT 5
-
-breed_list = %sql SELECT DISTINCT breed FROM dogs ORDER BY breed;
-breed_list.csv('breed_list.csv')
-
-SELECT DISTINCT breed,
-REPLACE(breed,'-','') AS breed_fixed
-FROM dogs
-ORDER BY breed_fixed
-
+Strengthen and Test Your Understanding
