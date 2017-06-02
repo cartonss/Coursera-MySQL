@@ -1,0 +1,61 @@
+Database ua_dillards;
+
+SELECT count(*) from trnsact;
+HELP table deptinfo;
+SHOW TABLE deptinfo;
+SHOW table skstinfo;
+SELECT TOP 3 * 
+FROM strinfo
+ORDER BY city ASC;
+
+SELECT *
+FROM skuinfo
+SAMPLE 10;
+
+SELECT TOP 3 ORGPRICE, SPRICE, AMT AS WHat
+FROM trnsact;
+
+SELECT TOP 3 * 
+FROM strinfo
+WHERE state = 'ny';
+
+HELP table strinfo;
+SELECT *
+FROM strinfo
+WHERE zip is NULL;
+
+SELECT TOP 3 * 
+FROM trnsact
+WHERE sku = 3631365
+ORDER BY ORGPRICE DESC;
+
+SELECT TOP 10 * 
+FROM skuinfo
+WHERE brand = 'liz clai'
+ORDER BY sku DESC;
+
+SELECT TOP 3 *
+FROM trnsact
+ORDER BY ORGPRICE DESC;
+
+SELECT DISTINCT state
+FROM strinfo;
+
+SELECT * 
+FROM deptinfo
+WHERE deptdesc LIKE 'e%';
+
+SELECT TOP 3 *
+FROM trnsact
+WHERE orgprice <> sprice
+ORDER BY saledate ASC;
+
+SELECT TOP 3* 
+FROM trnsact
+WHERE saledate = '2004-08-01'
+ORDER BY sprice - orgprice DESC;
+
+SELECT TOP 3 *
+FROM trnsact
+WHERE saledate > '2004-08-01' AND saledate < '2004-08-10'
+ORDER BY orgprice DESC, sprice DESC;
