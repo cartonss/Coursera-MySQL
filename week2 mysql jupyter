@@ -6,7 +6,9 @@ Once you are connected, the output cell (which reads "Out" followed by brackets)
 
 SELECT breed FROM dogs LIMIT 10 OFFSET 5; 10 rows of data will be returned, starting at Row 6. An alternative way to write the OFFSET clause in the query is: SELECT breed FROM dogs LIMIT 5, 10;
 
-%load_ext sql %sql mysql://studentuser:studentpw@mysqlserver/dognitiondb %sql USE dognitiondb
+%load_ext sql 
+%sql mysql://studentuser:studentpw@mysqlserver/dognitiondb 
+%sql USE dognitiondb
 
 SELECT dog_guid, weight FROM dogs WHERE weight BETWEEN 10 AND 50;
 
@@ -31,3 +33,28 @@ SELECT DISTINCT user_guid, (median_ITI_minutes * 60) AS median_ITI_sec FROM dogs
 breed_list = %sql SELECT DISTINCT breed FROM dogs ORDER BY breed; breed_list.csv('breed_list.csv')
 
 SELECT DISTINCT breed, REPLACE(breed,'-','') AS breed_fixed FROM dogs ORDER BY breed_fixed
+
+%%sql
+SELECT COUNT(*)
+FROM dogs;
+
+When a column is included in a count function, null values are ignored in the count. When an asterisk is included in a count function, nulls are included in the count.
+
+%%sql
+SELECT test_name, 
+TIMESTAMPDIFF(MINUTE, start_time, end_time) AS Duration
+FROM exam_answers
+LIMIT 3;
+
+%%sql
+SELECT AVG(TIMESTAMPDIFF(minute, start_time, end_time)) 
+FROM exam_answers;
+
+
+
+
+
+
+
+
+
