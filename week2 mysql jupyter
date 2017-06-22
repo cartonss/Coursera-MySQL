@@ -124,4 +124,37 @@ Queries that include subqueries always run the innermost subquery first,
 and then run subsequent queries sequentially in order from the innermost query to the outermost query.
 
 
+%%sql
+SELECT IF(cleaned_users.country='US','In US', 
+          IF(cleaned_users.country='N/A','Not Applicable','Outside US')) AS US_user, 
+      count(cleaned_users.user_guid)   
+FROM (SELECT DISTINCT user_guid, country 
+      FROM users
+      WHERE country IS NOT NULL) AS cleaned_users
+GROUP BY US_user
+
+You can think of CASE expressions as an efficient way to write a set of IF and ELSEIF statements.
+
+SELECT CASE WHEN cleaned_users.country="US" THEN "In US"
+            WHEN cleaned_users.country="N/A" THEN "Not Applicable"
+            ELSE "Outside US"
+            END AS US_user, 
+      count(cleaned_users.user_guid)   
+FROM (SELECT DISTINCT user_guid, country 
+      FROM users
+      WHERE country IS NOT NULL) AS cleaned_users
+GROUP BY US_user
+
+SELECT CASE cleaned_users.country
+            WHEN "US" THEN "In US"
+            WHEN "N/A" THEN "Not Applicable"
+            ELSE "Outside US"
+            END AS US_user, 
+      count(cleaned_users.user_guid)   
+FROM (SELECT DISTINCT user_guid, country 
+      FROM users
+      WHERE country IS NOT NULL) AS cleaned_users
+GROUP BY US_user
+
+
 
